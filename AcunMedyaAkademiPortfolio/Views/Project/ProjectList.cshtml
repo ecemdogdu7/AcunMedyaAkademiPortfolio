@@ -1,0 +1,30 @@
+﻿﻿@model List<AcunMedyaAkademiPortfolio.Models.TblProject>
+@{
+    ViewBag.Title = "ProjectList";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<h2>Projeler Listesi</h2>
+
+<table class="table table-bordered" style="width: 100%;">
+    <tr>
+        <th>Proje ID</th>
+        <th>Açıklama</th>
+        <th>Resim Yolu</th>
+        <th>Kategori</th>
+        <th>Güncelle</th>
+        <th>Sil</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.ProjectId</td>
+            <td>@item.Description</td>
+            <td><img src="@item.ImageUrl" class="img-fluid" style="width:200px ; height:150px" /></td>
+            <td>@item.TblCategory.CategoryName</td>
+            <td><a href="/Project/UpdateProject/@item.ProjectId" class="btn btn-outline-success">Güncelle</a></td>
+            <td><a href="/Project/DeleteProject/@item.ProjectId" class="btn btn-outline-danger">Sil</a></td>
+        </tr>
+    }
+</table>
+<a href="/Project/CreateProject/" class="btn btn-outline-primary">Proje Ekle</a>

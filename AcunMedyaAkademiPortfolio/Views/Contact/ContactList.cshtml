@@ -1,0 +1,74 @@
+﻿﻿@model List<AcunMedyaAkademiPortfolio.Models.TblContact>
+@{
+    ViewBag.Title = "ContactList";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<h2>Mesaj Listesi</h2>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<table class="table table-bordered" style="width: 100%;">
+    <tr>
+        <th>Mesaj ID</th>
+        <th>İsim-Soyisim</th>
+        <th>E-Mail</th>
+        <th>Telefon</th>
+        <th>Mesajı Görüntüle</th>
+        <th>Sil</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.ContactId</td>
+            <td>@item.NameSurname</td>
+            <td>@item.Email</td>
+            <td>@item.Phone</td>
+            <td>
+                <!-- Modal tetikleme butonu -->
+                <button class="btn btn-info"
+                        data-bs-toggle="modal"
+                        data-bs-target="#messageModal"
+                        data-message="@item.Message">
+                    Mesajı Görüntüle
+                </button>
+            </td>
+            <td>
+                <a href="/Category/DeleteContact/@item.ContactId" class="btn btn-outline-danger">Sil</a>
+            </td>
+        </tr>
+    }
+</table>
+
+<!-- Modal -->
+<div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="messageModalLabel">Mesaj Detayı</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+            </div>
+            <div class="modal-body">
+                <p id="modalMessageContent"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    
+    document.addEventListener('DOMContentLoaded', function () {
+        const messageModal = document.getElementById('messageModal');
+        const modalMessageContent = document.getElementById('modalMessageContent');
+
+        messageModal.addEventListener('show.bs.modal', function (event) {
+            const button = event.relatedTarget; // Modal'ı açan buton
+            const message = button.getAttribute('data-message'); // Mesaj içeriği
+            modalMessageContent.textContent = message; // Mesajı modal'a yazdır
+        });
+    });
+</script>
