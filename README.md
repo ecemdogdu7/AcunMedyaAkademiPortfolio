@@ -16,6 +16,7 @@
 * CSS
 * Bootstrap
 * JavaScript
+* LINQ sorguları
 
 # Veri Tabanı 💾
 ![diyagram](https://github.com/user-attachments/assets/eea654a2-5d4a-4b6d-887e-4ba98b0070b3)
